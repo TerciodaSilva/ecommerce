@@ -1,0 +1,36 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+spring:
+  application:
+    name: ms-gateway
+  cloud:
+    gateway:
+      routes:
+          # Authenticate microservice
+        - id: auth
+          uri: lb://ms-security
+          predicates:
+            - Path=/auth/**
+
+          # Product microservice access user
+        - id: product-user
+          uri: lb://ms-product
+          predicates:
+            - Method=GET
+            - Path=/categories,/products/**
+          filters:
+            - AuthenticationFilter
+
+          # Product microservice access admin
+        - id: product-admin
+          uri: lb://ms-product
+          predicates:
+            - Method=POST
+            - Path=/categories,/products/**
+          filters:
+            - SuperUserFilter

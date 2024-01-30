@@ -1,0 +1,72 @@
+services:
+  postgres-db:
+    image: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ms-email
+    ports:
+      - 9875:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./dados:/var/lib/rabbitmq/
+
+  ms-eureka:
+    hostname: eureka
+    image: eureka-api
+    build:
+      context: ./eureka
+      dockerfile: Dockerfile
+    network_mode: "host"
+
+  ms-gateway:
+    hostname: gateway
+    image: gateway-api
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    network_mode: "host"
+
+  ms-notification:
+    hostname: notification
+    image: notification-api
+    build:
+      context: ./notification
+      dockerfile: Dockerfile
+    network_mode: "host"
+    depends_on:
+      - postgres-db
+      - rabbitmq
+
+  ms-project:
+    hostname: project
+    image: project-api
+    build:
+      context: ./project
+      dockerfile: Dockerfile
+    network_mode: "host"
+    depends_on:
+      - postgres-db
+
+  ms-security:
+    hostname: security
+    image: security-api
+    build:
+      context: ./security
+      dockerfile: Dockerfile
+    network_mode: "host"
+    depends_on:
+      - postgres-db
+
+volumes:
+  postgres-data:
