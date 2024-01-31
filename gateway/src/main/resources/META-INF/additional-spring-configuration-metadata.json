@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "ms-security.getAuthRolesUrl",
+      "type": "java.lang.String",
+      "description": "Description for ms-security.getAuthRolesUrl."
+    }
+  ] }

@@ -1,7 +1,10 @@
+ms-security:
+  getAuthRolesUrl: http://ms-security:8000/auth/roles
+
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+    serviceUrl:
+      defaultZone: http://ms-eureka:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
@@ -30,7 +33,7 @@ spring:
         - id: product-admin
           uri: lb://ms-product
           predicates:
-            - Method=POST
+            - Method=POST,PUT,DELETE
             - Path=/categories,/products/**
           filters:
             - SuperUserFilter

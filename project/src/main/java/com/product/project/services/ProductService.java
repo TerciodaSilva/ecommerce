@@ -8,17 +8,23 @@ import com.product.project.repositories.ProductRepository;
 import com.product.project.services.exception.DatabaseException;
 import com.product.project.services.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.http.HttpException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +38,7 @@ public class ProductService {
 
     public Product findById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
     }
 
     @Transactional(readOnly = true)
@@ -66,9 +72,11 @@ public class ProductService {
         }
     }
 
-
     public void delete(Long id) {
         try {
+            productRepository.findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND, "Produto não encontrado!"));
             productRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException(id);
@@ -83,7 +91,7 @@ public class ProductService {
             updateData(entity, product);
             return productRepository.save(entity);
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException(id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado! ");
         }
     }
 

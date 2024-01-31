@@ -8,7 +8,7 @@ import static com.product.security.dto.exceptions.InvalidPasswordException.valid
 
 public record RegisterDTO(@NotEmpty String firstName, @NotEmpty String lastName, @NotEmpty String email, @NotEmpty String password, @NotEmpty Role role ) {
     public RegisterDTO {
-        // validateEmail(email);
+        validateEmail(email);
         validatePassword(password);
     }
 }

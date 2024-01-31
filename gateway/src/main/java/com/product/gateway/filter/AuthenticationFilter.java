@@ -16,9 +16,11 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         super(AuthenticationFilter.Config.class);
     }
 
+    @Autowired
+    private CheckPermissions checkPermissions;
+
     @Override
     public GatewayFilter apply(AuthenticationFilter.Config config) {
-        CheckPermissions checkPermissions = new CheckPermissions();
         return checkPermissions.getRoles("ROLE_USER");
     }
 

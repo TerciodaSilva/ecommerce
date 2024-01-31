@@ -7,7 +7,7 @@ import static com.product.security.dto.exceptions.InvalidPasswordException.valid
 
 public record AuthetinticationDTO(String email, String password) {
     public AuthetinticationDTO {
-        // validateEmail(email);
+        validateEmail(email);
         validatePassword(password);
     }
 }

@@ -15,9 +15,11 @@ public class SuperUserFilter extends AbstractGatewayFilterFactory<SuperUserFilte
         super(Config.class);
     }
 
+    @Autowired
+    private CheckPermissions checkPermissions;
+
     @Override
     public GatewayFilter apply(Config config) {
-        CheckPermissions checkPermissions = new CheckPermissions();
         return checkPermissions.getRoles("ROLE_ADMIN");
     }
 

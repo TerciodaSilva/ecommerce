@@ -4,10 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HttpHeaders;
-import com.product.gateway.exceptions.ForbbidenResourceHandler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -16,7 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class CheckPermissions {
+
+    @Value("${ms-security.getAuthRolesUrl}")
+    private String url;
+
     public String getToken(ServerWebExchange exchange) {
         return exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
     }
@@ -36,7 +42,7 @@ public class CheckPermissions {
 
     public GatewayFilter getRoles(String role) {
         return ((exchange, chain) -> WebClient.builder().build().get()
-                .uri("http://localhost:8000/auth/roles")
+                .uri(url)
                 .header(HttpHeaders.AUTHORIZATION, getToken(exchange))
                 .retrieve()
                 .bodyToMono(String.class)
