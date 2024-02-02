@@ -47,7 +47,7 @@ Nesse momento é necessário realizar a autenticação no endpoint ```Login```.
 
     {
         "email": "email",
-        "password": "seha"
+        "password": "senha"
     }
 
 - ``email`` Email que foi cadastrado.
