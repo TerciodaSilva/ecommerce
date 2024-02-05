@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class SuperUserFilter extends AbstractGatewayFilterFactory<SuperUserFilter.Config> {
 
-    @Autowired
-    private RouteValidator validator;
-
     public SuperUserFilter() {
         super(Config.class);
     }
