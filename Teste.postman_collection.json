@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "923487e2-4edc-4ffc-af19-35e342eddfd7",
+		"_postman_id": "9a5cc62f-812e-4e05-b89a-8aab1e554882",
 		"name": "Teste",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26638744"
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Tercio\",\r\n    \"lastName\": \"da Silva\",\r\n    \"email\": \"terciosilva1208@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Tércio\",\r\n    \"lastName\": \"da Silva\",\r\n    \"email\": \"terciosilva1208@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"role\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,12 +51,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/auth/login",
-							"protocol": "http",
+							"raw": "{{host}}/auth/login",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
 							"path": [
 								"auth",
 								"login"
@@ -71,182 +69,206 @@
 			"name": "Produto",
 			"item": [
 				{
-					"name": "Cadastrar Categoria",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"moda\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/categories",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"categories"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Visualizar Categorias",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{host}}/categories",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"categories"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Cadastrar Produto",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Camisa Slim\",\r\n    \"description\": \"Camisa Slim Preta\",\r\n    \"price\": 99.99,\r\n    \"imgUrl\": \"\",\r\n    \"categoryIds\": [\r\n        1\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/products",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Visualizar Produto",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/products/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"products",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Visualizar Produtos Paginados",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/products?page=0&linesPerPage=2&direction=DESC&orderBy=name",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"products"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "0"
+					"name": "Categoria",
+					"item": [
+						{
+							"name": "Cadastrar Categoria",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"cozinha\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
 								},
-								{
-									"key": "linesPerPage",
-									"value": "2"
-								},
-								{
-									"key": "direction",
-									"value": "DESC"
-								},
-								{
-									"key": "orderBy",
-									"value": "name"
+								"url": {
+									"raw": "{{host}}/categories",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories"
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualizar Produto",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Camisa Slim\",\r\n    \"description\": \"Camisa Slim Preta\",\r\n    \"price\": 149.99,\r\n    \"imgUrl\": \"\",\r\n    \"categoryIds\": [\r\n        5\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:8080/products/4",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"4"
-							]
+						{
+							"name": "Visualizar Categorias",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Categoria",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/categories/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Deletar Produto",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/products/4",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"products",
-								"4"
-							]
+					"name": "Produto",
+					"item": [
+						{
+							"name": "Cadastrar Produto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Camisa Slim\",\r\n    \"description\": \"Camisa Slim Preta\",\r\n    \"price\": 99.99,\r\n    \"imgUrl\": \"\",\r\n    \"categoryIds\": [\r\n        1\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/products",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Visualizar Produto",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/products/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"products",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Visualizar Produtos Paginados",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/products?page=0&linesPerPage=2&direction=DESC&orderBy=name",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "linesPerPage",
+											"value": "2"
+										},
+										{
+											"key": "direction",
+											"value": "DESC"
+										},
+										{
+											"key": "orderBy",
+											"value": "name"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualizar Produto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Camisa Slim\",\r\n    \"description\": \"Camisa Slim Preta\",\r\n    \"price\": 149.99,\r\n    \"imgUrl\": \"\",\r\n    \"categoryIds\": [\r\n        1\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/products/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"products",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar Produto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/products/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"products",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			],
 			"auth": {
@@ -254,7 +276,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "Inserir TOKEN JWT",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoIiwic3ViIjoidGVyY2lvc2lsYTEyMDhAZ21haWwuY29tIiwicm9sZXMiOnsicm9sZXMiOlsiYWRtaW4iXX0sImV4cCI6MTcwNzE5NTk1N30.bbIpsW02vfmmkyayvFze1jGYBTI6rnQkaSTL_LNuXfs",
 						"type": "string"
 					}
 				]
