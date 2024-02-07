@@ -1,7 +1,8 @@
-package com.product.security.dto.exceptions;
+package com.product.security.dto.exceptions.handler;
 
+import com.product.security.dto.exceptions.InvalidEmailException;
+import com.product.security.dto.exceptions.InvalidPasswordException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.server.ResponseStatusException;
